@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Quadri' });
 });
 
-router.get('/api/facturaVenta', db.facturaVenta);
+router.get('/api/prueba', db.prueba);
+router.get('/api/facturacion', db.facturacion);
 
 
 module.exports = router;

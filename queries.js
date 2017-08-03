@@ -10,7 +10,22 @@ var pgp = require('pg-promise')(options);
 var connectionString = 'postgres://calipso:calipso@192.168.0.205:5432/Quadriprueba1';
 var db = pgp(connectionString);
 
-function facturaVenta(req, res, next) {
+function prueba(req, res, next) {
+  db.any('select * from trfacturaventa limit 10')
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          data: data,
+          message: 'Retrieved sales'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function facturacion(req, res, next) {
   db.any('select * from trfacturaventa limit 10')
     .then(function (data) {
       res.status(200)
@@ -28,7 +43,8 @@ function facturaVenta(req, res, next) {
 // add query functions
 
 module.exports = {
-  facturaVenta: facturaVenta,
+  prueba: prueba,
+  facturacion: facturacion
 };
 
 // connection string
