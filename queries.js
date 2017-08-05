@@ -11,7 +11,8 @@ var connectionString = 'postgres://calipso:calipso@192.168.0.205:5432/Quadriprue
 var db = pgp(connectionString);
 
 function prueba(req, res, next) {
-  db.any('select * from trfacturaventa limit 10')
+  db.any('select * from trfacturaventa\
+  limit 10')
     .then(function (data) {
       res.status(200)
         .json({
