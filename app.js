@@ -6,26 +6,32 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var index = require('./routes/index');
+var isProduction = process.env.NODE_ENV === 'production';
 
+// creo objeto de app global
 var app = express();
 
 // esto para que asigne correctamente los headers
 app.use(cors());
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+// !! esto lo saque, entiendo que es por si usara views
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// Configs de express
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+// app.use('/', require('./routes/index'));  // !!  esto lo saco, era de lo que venia seteado
+app.use(require('./routes'));
+// app.use(require('./routes'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,4 +64,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
-module.exports = app;
+// esto lo agregue yo
+var server = app.listen( process.env.PORT || 3100, function(){
+  console.log('Listening on port ' + server.address().port);
+});
+
+// module.exports = app;  // lo saco viene del original
