@@ -20,7 +20,7 @@
 	       ALIAS_0.IMPORTEBONIFICADO IMPORTE_BONIFICADO, 
 	       ALIAS_0.TOTAL2_IMPORTE TOTAL_IMPORTE, 
 	 	  gv.descripcion as origen 
-	--'       ALIAS_0.IMPDESC2_IMPORTE IMPDESC2_IMPORTE, 
+	--'       ALIAS_0.IMPDESC2_IMPORTE IMPDESC2_IMPORTE,
 	FROM V_ITEMVENTA ALIAS_0 
 	LEFT OUTER JOIN V_TIPOTRANSACCION ALIAS_1 ON ALIAS_0.TIPOTRANSACCION_ID = ALIAS_1.ID 
 	LEFT OUTER JOIN V_SUBSUCURSAL ALIAS_2 ON ALIAS_0.SUBSUCURSAL_ID = ALIAS_2.ID 
@@ -66,13 +66,12 @@
 	--''	LEFT OUTER JOIN UD_TRFACTURAVENTA UD ON TRF.BOEXTENSION_ID = UD.ID 
 	--''	left join grupovistas GV on GV.id = UD.origenFV_id 
 	WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL 
-	--''  AND SUBSTRING(ALIAS_0.FECHADOCUMENTO,1,6) = '" & xFecha & "' 
-	--       AND substring(ALIAS_0.fechadocumento,1,8) >= '" & xFechaDesde & "' 
-          -- AND substring(ALIAS_0.fechadocumento,1,8) <= '" & xFechaHasta & "' 
-	--'  AND ALIAS_0.FECHADOCUMENTO <= '" & xFechaHasta & "' 
 
-	and substring(alias_0.fechadocumento,1,8) >= substring('20160701',1,8)
-	and substring(alias_0.fechadocumento,1,8)<= substring('20170727',1,8)
+  and substring(alias_0.fechadocumento,1,8) >= substring(${fechaDesde},1,8)
+	and substring(alias_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8) 
+ 
+	-- and substring(alias_0.fechadocumento,1,8) >= substring('20160701',1,8)
+	-- and substring(alias_0.fechadocumento,1,8)<= substring('20170727',1,8)
 	  AND (ALIAS_0.ESTADOTR = 'C') 
 	--'  AND ALIAS_1.CODIGO LIKE '%%' 
 	  AND ALIAS_0.BO_PLACE_ID IS NOT NULL

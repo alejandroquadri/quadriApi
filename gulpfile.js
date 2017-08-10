@@ -19,15 +19,16 @@ gulp.task('compile', function () {
 });
 
 gulp.task('sqlCopy', function () {
-  var stram = gulp.src('./src/**/*.sql')
-    .pipe(gulp.dest('./build'));
+  gulp.src('./src/**/*.sql')
+  .pipe(gulp.dest('./build'));
 });
 
 gulp.task('watch', ['compile', 'sqlCopy'], function () {
   var stream = nodemon({
     script: './build/app.js', // run ES5 code
     watch: 'src', // watch ES2015 code
-    tasks: ['compile'] // compile synchronously onChange
+    ext: 'js sql',
+    tasks: ['compile', 'sqlCopy'] // compile synchronously onChange
   });
 
   return stream;

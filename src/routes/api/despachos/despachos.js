@@ -1,6 +1,4 @@
 const router = require('express').Router();
-// const db = require('../../db');
-// import * as db from '../../db';
 import { db, pgp } from '../../../db';
 const moment = require("moment");
 
@@ -12,13 +10,13 @@ function sql(file) {
     return new pgp.QueryFile(fullPath, {minify: true});
 }
 
-const facturacion = sql('./facturacion.sql');
+const facturacion = sql('./remitos.sql');
 
 const today = moment(new Date());
 let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(6, 'months').format('YYYYMMDD');
 
-router.get('/facturacion', function(req, res, next) {
+router.get('/remitos', function(req, res, next) {
  db.any(facturacion, {fechaDesde:desde, fechaHasta:hasta })
     .then(function (data) {
       res.status(200)
