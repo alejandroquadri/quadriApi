@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const db = require('../../db');
 // import * as db from '../../db';
-import { db, pgp } from '../../db';
+import { db, pgp } from '../../../db';
 
 const path = require('path');
 
