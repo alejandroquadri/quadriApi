@@ -1,19 +1,38 @@
-// get access to the gulp API
 var gulp = require('gulp');
 var print = require('gulp-print');
 var babel = require('gulp-babel');
+var nodemon = require('gulp-nodemon');
+var notify = require('gulp-notify');
+var livereload = require('gulp-livereload');
+var Cache = require('gulp-file-cache');
 
-gulp.task('build', function() {
-  return gulp.src('src/**/*.js')               // #1. select all js files in the app folder
-    .pipe(print())                           // #2. print each file in the stream
-	  .pipe(babel({ presets: ['es2015'] }))    // #3. transpile ES2015 to ES5 using ES2015 preset
-	  .pipe(gulp.dest('build'));               // #4. copy the results to the build folder
+var cache = new Cache();
+
+gulp.task('compile', function () {
+  var stream = gulp.src('./src/**/*.js') // your ES2015 code
+	  .pipe(cache.filter()) // remember files
+	  .pipe(print()) 
+	  .pipe(babel({ presets: ['es2015'] })) // compile new ones
+	  .pipe(cache.cache()) // cache them
+	  .pipe(gulp.dest('./build')); // write them
+  return stream; // important for gulp-nodemon to wait for completion
 });
 
-gulp.task('watch', function(){
-    gulp.watch('src/**/*.*', ['build']);
+gulp.task('sqlCopy', function () {
+  var stram = gulp.src('./src/**/*.sql')
+    .pipe(gulp.dest('./build'));
 });
 
-gulp.task('default', ['build', 'watch']);
+gulp.task('watch', ['compile', 'sqlCopy'], function () {
+  var stream = nodemon({
+    script: './build/app.js', // run ES5 code
+    watch: 'src', // watch ES2015 code
+    tasks: ['compile'] // compile synchronously onChange
+  });
+
+  return stream;
+});
+
+gulp.task('default', ['watch']);
 
 
