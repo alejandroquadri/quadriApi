@@ -19,8 +19,9 @@ gulp.task('compile', function () {
 });
 
 gulp.task('sqlCopy', function () {
-  gulp.src('./src/**/*.sql')
-  .pipe(gulp.dest('./build'));
+  var stream = gulp.src('./src/**/*.sql')
+    .pipe(gulp.dest('./build'));
+  return stream;
 });
 
 gulp.task('watch', ['compile', 'sqlCopy'], function () {

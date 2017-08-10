@@ -68,7 +68,7 @@
 	WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL 
 
   and substring(alias_0.fechadocumento,1,8) >= substring(${fechaDesde},1,8)
-	and substring(alias_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8) 
+	and substring(alias_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8)
  
 	-- and substring(alias_0.fechadocumento,1,8) >= substring('20160701',1,8)
 	-- and substring(alias_0.fechadocumento,1,8)<= substring('20170727',1,8)
