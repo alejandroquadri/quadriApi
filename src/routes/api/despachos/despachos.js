@@ -1,23 +1,18 @@
-const router = require('express').Router();
-import { db, pgp } from '../../../db';
-const moment = require("moment");
+import express from 'express';
+import { db } from '../../../db';
+import { sql } from '../../../dbHelper';
+import moment from 'moment';
 
-const path = require('path');
+const router = express.Router();
 
-// Helper for linking to external query files:
-function sql(file) {
-    const fullPath = path.join(__dirname, file);
-    return new pgp.QueryFile(fullPath, {minify: true});
-}
-
-const facturacion = sql('./remitos.sql');
+const despachosSQL = sql(__dirname, './remitos.sql');
 
 const today = moment(new Date());
 let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(6, 'months').format('YYYYMMDD');
 
-router.get('/remitos', function(req, res, next) {
- db.any(facturacion, {fechaDesde:desde, fechaHasta:hasta })
+router.get('/', function(req, res, next) {
+ db.any(despachosSQL, {fechaDesde:desde, fechaHasta:hasta })
     .then(function (data) {
       res.status(200)
         .json({
