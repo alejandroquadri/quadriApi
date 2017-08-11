@@ -16,14 +16,6 @@ const db = require('./db'); // your db module
 // esto para que asigne correctamente los headers
 app.use(cors());
 
-// view engine setup
-// !! esto lo saque, entiendo que es por si usara views
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 // Configs de express
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -32,9 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-// app.use('/', require('./routes/index'));  // !!  esto lo saco, era de lo que venia seteado
 app.use(require('./routes'));
-// app.use(require('./routes'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,6 +38,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
+  console.log('en dev');
   app.use(function(err, req, res, next) {
     res.status( err.code || 500 )
     .json({
@@ -55,6 +46,8 @@ if (app.get('env') === 'development') {
       message: err
     });
   });
+} else { 
+  console.log('en prod');
 }
 
 // production error handler
