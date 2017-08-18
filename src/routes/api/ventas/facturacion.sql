@@ -78,12 +78,12 @@
 	
 	
 	 and alias_1.codigo not like 'VT05;RES-;tt-' 
- and alias_1.codigo not like 'VT02'
- and alias_1.codigo not like 'VT01'
- and alias_1.codigo not like 'VT10;RES-;'
- and alias_1.codigo not like 'VT09;RES+;'
- and alias_1.codigo not like 'VT06;VENTAS-;RES-;' 
- and alias_1.codigo not like 'VT14' 
+	 and alias_1.codigo not like 'VT02'
+	 and alias_1.codigo not like 'VT01'
+	 and alias_1.codigo not like 'VT10;RES-;'
+	 and alias_1.codigo not like 'VT09;RES+;'
+	 and alias_1.codigo not like 'VT06;VENTAS-;RES-;' 
+	 and alias_1.codigo not like 'VT14' 
 
 
  Union all

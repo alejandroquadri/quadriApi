@@ -10,7 +10,7 @@ const pgp = require('pg-promise')(options);
 const config = {
     host: '192.168.0.205',
     port: 5432,
-    database: 'quadriBD',
+    database: 'QUADRIBDN',
     user: 'calipso',
     password: 'calipso'
 };
