@@ -12,6 +12,7 @@ var isProduction = process.env.NODE_ENV === 'production';
 var app = express();
 
 const db = require('./db'); // your db module
+// const google = require('./googleApi');
 
 // esto para que asigne correctamente los headers
 app.use(cors());
