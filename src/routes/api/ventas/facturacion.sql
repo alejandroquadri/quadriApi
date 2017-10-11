@@ -166,3 +166,5 @@
  and alias_1.codigo not like 'VT09;RES+;'
  and alias_1.codigo not like 'VT14'
  and alias_1.codigo not like 'VT03'
+
+ order by FECHA_DOCUMENTO desc
