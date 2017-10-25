@@ -8,7 +8,7 @@ const router = express.Router();
 const balanceSQL = sql(__dirname, './balance.sql');
 const resultadosSQL = sql(__dirname, './resultados.sql');
 
-const today = moment(new Date());
+const today = moment();
 let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(12, 'months').format('YYYYMMDD');
 

@@ -4,13 +4,6 @@ let authentication = require("../../../googleApi");
 
 const router = express.Router();
 
-router.get('/prueba', function(req, res, next) {
-	res.status(200)
-		.json({
-	    status: 'success',
-    });
-});
-
 router.get('/', function(req, res, next) {
 	authentication.authenticate().then((auth)=>{
     var sheets = google.sheets('v4');

@@ -7,7 +7,7 @@ const router = express.Router();
 
 const despachosSQL = sql(__dirname, './remitos.sql');
 
-const today = moment(new Date());
+const today = moment();
 let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(6, 'months').format('YYYYMMDD');
 
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
         .json({
           status: 'success',
           data: data,
-          message: 'Retrieved sales'
+          message: 'Retrieved despachos'
         });
     })
     .catch(function (err) {

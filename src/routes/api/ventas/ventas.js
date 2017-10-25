@@ -5,7 +5,8 @@ const moment = require("moment");
 
 const facturacionSQL = sql(__dirname, './facturacion.sql');
 
-const today = moment(new Date());
+// const today = moment(new Date());
+const today = moment();
 let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(6, 'months').format('YYYYMMDD');
 
