@@ -24,7 +24,7 @@ SELECT
 	LEFT OUTER JOIN V_ITEMTIPOCLASIFICADOR IC2 ON CC.TIPOGASTO_ID = IC2.ID
 	WHERE    
 	ALIAS_0.BO_PLACE_ID IS NOT NULL   AND  
-	substring(alias_0.fechavencimiento,1,8) >= substring('20150701',1,8) and
+	substring(alias_0.fechavencimiento,1,8) >= substring('20160701',1,8) and
 	substring(alias_0.fechavencimiento,1,8) <= ${fechaHasta} 
 
  and alias_7.codigo not like '5%' 
