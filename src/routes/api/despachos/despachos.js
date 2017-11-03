@@ -12,7 +12,10 @@ let hasta = today.format('YYYYMMDD');
 let desde = today.subtract(6, 'months').format('YYYYMMDD');
 
 router.get('/', function(req, res, next) {
- db.any(despachosSQL, {fechaDesde:desde, fechaHasta:hasta })
+  const today = moment();
+  let hasta = today.format('YYYYMMDD');
+  let desde = today.subtract(6, 'months').format('YYYYMMDD');
+  db.any(despachosSQL, {fechaDesde:desde, fechaHasta:hasta })
     .then(function (data) {
       res.status(200)
         .json({
