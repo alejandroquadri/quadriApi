@@ -46,7 +46,7 @@ router.get('/psp', function(req, res, next) {
 router.get('/docs', function(req, res, next) {
   let today = moment();
   let hasta = today.format('YYYYMMDD');
-  let desde = today.subtract(24, 'months').format('YYYYMMDD');
+  let desde = today.subtract(6, 'months').format('YYYYMMDD');
   db.any(docs, {fechaDesde:desde, fechaHasta:hasta })
   .then(function (data) {
     res.status(200)

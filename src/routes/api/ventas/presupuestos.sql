@@ -69,9 +69,9 @@ SELECT ALIAS_0.NOMBRETR TRANSACCION,
 	-- and substring(alias_0.fechadocumento,1,8) >= substring('20160701',1,8)
 	-- and substring(alias_0.fechadocumento,1,8)<= substring('20170727',1,8)
 	
-	  AND (ALIAS_0.ESTADOTR = 'C') 
+	  AND (ALIAS_0.ESTADOTR = 'C' or ALIAS_0.ESTADOTR = 'A') 
 	  AND ALIAS_0.BO_PLACE_ID IS NOT NULL
-	and  alias_1.codigo like 'VT03'
+		AND  alias_1.codigo like 'VT03'
 	
 
 
@@ -147,9 +147,9 @@ SELECT ALIAS_0.NOMBRETR TRANSACCION,
 --and substring(alias_0.fechadocumento,1,8) >= substring('20160701',1,8)
 --	 and substring(alias_0.fechadocumento,1,8)<= substring('20170727',1,8)
 
-	  AND (ALIAS_0.ESTADOTR = 'C') 
+	  AND (ALIAS_0.ESTADOTR = 'C' or ALIAS_0.ESTADOTR = 'A')
 	  AND ALIAS_0.BO_PLACE_ID IS NOT NULL
-and  alias_1.codigo like 'VT03'
+		AND  alias_1.codigo like 'VT03'
 
  
 

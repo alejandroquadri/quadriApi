@@ -246,7 +246,7 @@ SELECT ALIAS_0.NOMBRETR TRANSACCION,
 	 -- and substring(alias_0.fechadocumento,1,8) >= substring('20171101',1,8)
 	 -- and substring(alias_0.fechadocumento,1,8)<= substring('20171201',1,8)
 
-	  AND (ALIAS_0.ESTADOTR = 'A')
+	  AND (ALIAS_0.ESTADOTR = 'A' or ALIAS_0.ESTADOTR = 'C')
 	  AND ALIAS_0.BO_PLACE_ID IS NOT NULL
 
 
