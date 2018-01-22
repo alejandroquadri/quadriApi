@@ -18,8 +18,8 @@ SELECT ALIAS_0.NOMBRETR TRANSACCION,
            ALIAS_0.VALOR2_IMPORTE PRECIO,
            ALIAS_0.IMPORTEBONIFICADO IMPORTE_BONIFICADO,
            ALIAS_0.TOTAL2_IMPORTE TOTAL_IMPORTE,
-          gv.descripcion as origen,
-seg.nombre5 as color
+        gv.descripcion as origen,
+        seg.nombre5 as color
 
     FROM V_ITEMVENTA ALIAS_0
     LEFT OUTER JOIN V_TIPOTRANSACCION ALIAS_1 ON ALIAS_0.TIPOTRANSACCION_ID = ALIAS_1.ID
