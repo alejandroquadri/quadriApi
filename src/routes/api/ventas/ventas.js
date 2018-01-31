@@ -6,6 +6,7 @@ const moment = require("moment");
 const facturacionSQL = sql(__dirname, './facturacion.sql');
 const psp = sql(__dirname, './presupuestos.sql');
 const docs = sql(__dirname, './docsVtas.sql');
+const precios = sql(__dirname, './lista-precios.sql')
 
 router.get('/', function(req, res, next) {
   let today = moment();
@@ -54,6 +55,21 @@ router.get('/docs', function(req, res, next) {
         status: 'success',
         data: data,
         message: 'Retrieved docs'
+      });
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+});
+
+router.get('/precios', function(req, res, next) {
+  db.any(precios)
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved precios'
       });
   })
   .catch(function (err) {

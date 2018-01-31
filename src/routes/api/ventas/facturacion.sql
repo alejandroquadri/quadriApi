@@ -15,9 +15,9 @@ SELECT	ALIAS_0.NOMBRETR TRANSACCION,
 		ALIAS_1.AFECTASTOCK AFECTASTOCK, 
 		ALIAS_0.CANTIDAD2_CANTIDAD CANTIDAD, 
 		ALIAS_0.CNOLINEAL2_CANTIDAD CANTIDAD_NL, 
-		ALIAS_0.VALOR2_IMPORTE PRECIO, 
-		ALIAS_0.IMPORTEBONIFICADO IMPORTE_BONIFICADO, 
-		ALIAS_0.TOTAL2_IMPORTE TOTAL_IMPORTE, 
+		round(ALIAS_0.VALOR2_IMPORTE,2) PRECIO, 
+		round(ALIAS_0.IMPORTEBONIFICADO, 2) IMPORTE_BONIFICADO, 
+		round(ALIAS_0.TOTAL2_IMPORTE,2) TOTAL_IMPORTE, 
 		GV.descripcion as origen,
 		SEG.nombre5 as marca
 
@@ -67,8 +67,8 @@ LEFT JOIN segmento SEG on b.segmento_id = seg.id
 WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL 
 AND substring(ALIAS_0.fechadocumento,1,8) >= substring(${fechaDesde},1,8)
 AND substring(ALIAS_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8)
--- AND substring(ALIAS_0.fechadocumento,1,8) >= substring('20160701',1,8)
--- AND substring(ALIAS_0.fechadocumento,1,8)<= substring('20170727',1,8)
+-- AND substring(ALIAS_0.fechadocumento,1,8) >= substring('20180101',1,8)
+-- AND substring(ALIAS_0.fechadocumento,1,8)<= substring('20180123',1,8)
 AND ALIAS_0.ESTADOTR = 'C'
 AND ALIAS_0.BO_PLACE_ID IS NOT NULL
 AND ALIAS_1.codigo not like 'VT05;RES-;tt-' 
@@ -80,6 +80,28 @@ AND ALIAS_1.codigo not like 'VT06;VENTAS-;RES-;'
 AND ALIAS_1.codigo not like 'VT14' 
 AND ALIAS_1.codigo not like 'VT03'
 
+GROUP BY 	ALIAS_0.NOMBRETR , 
+			ALIAS_0.ESTADOTR , 
+			ALIAS_7.DESCRIPCION , 
+			SUBSTRING(ALIAS_0.FECHADOCUMENTO,1,4) ||'/'|| SUBSTRING(ALIAS_0.FECHADOCUMENTO,5,2) ||'/'|| SUBSTRING(ALIAS_0.FECHADOCUMENTO,7,2) , 
+			SUBSTRING(ALIAS_0.FECHAENTREGA,1,4) ||'/'|| SUBSTRING(ALIAS_0.FECHAENTREGA,5,2) ||'/'|| SUBSTRING(ALIAS_0.FECHAENTREGA,7,2) , 
+			ALIAS_0.NUMERODOCUMENTO , 
+			ALIAS_0.NOMBREORIGINANTETR , 
+			ALIAS_0.NOMBREDESTINATARIOTR , 
+			ALIAS_6.NOMBRE , 
+			ALIAS_0.COTIZACION , 
+			ALIAS_1.CODIGO , 
+			ALIAS_9.CODIGO , 
+			ALIAS_9.DESCRIPCION , 
+			ALIAS_1.DESCRIPCION , 
+			ALIAS_1.AFECTASTOCK , 
+			ALIAS_0.CANTIDAD2_CANTIDAD , 
+			ALIAS_0.CNOLINEAL2_CANTIDAD , 
+			round(ALIAS_0.VALOR2_IMPORTE,2) , 
+			round(ALIAS_0.IMPORTEBONIFICADO, 2) , 
+			round(ALIAS_0.TOTAL2_IMPORTE,2) , 
+			GV.descripcion  ,
+			SEG.nombre5																															
 
 UNION ALL
 
@@ -100,9 +122,9 @@ SELECT 	ALIAS_0.NOMBRETR TRANSACCION,
 		ALIAS_1.AFECTASTOCK AFECTASTOCK, 
 		ALIAS_0.CANTIDAD2_CANTIDAD CANTIDAD, 
 		ALIAS_0.CNOLINEAL2_CANTIDAD CANTIDAD_NL, 
-		-(ALIAS_0.VALOR2_IMPORTE) PRECIO, 
-		-(ALIAS_0.IMPORTEBONIFICADO) IMPORTE_BONIFICADO, 
-		-(ALIAS_0.TOTAL2_IMPORTE) TOTAL_IMPORTE, 
+		round(-(ALIAS_0.VALOR2_IMPORTE),2) PRECIO, 
+		round(-(ALIAS_0.IMPORTEBONIFICADO),2) IMPORTE_BONIFICADO, 
+		round(-(ALIAS_0.TOTAL2_IMPORTE),2) TOTAL_IMPORTE, 
 		GV.descripcion as origen,
 		SEG.nombre5 as marca
 
@@ -153,8 +175,8 @@ LEFT JOIN segmento SEG on b.segmento_id = seg.id
 WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL 
 AND substring(ALIAS_0.fechadocumento,1,8) >= substring(${fechaDesde},1,8)
 AND substring(ALIAS_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8)
--- AND substring(ALIAS_0.fechadocumento,1,8) >= substring('20160701',1,8)
--- AND substring(ALIAS_0.fechadocumento,1,8)<= substring('20170727',1,8)
+-- AND substring(ALIAS_0.fechadocumento,1,8) >= substring('20180101',1,8)
+-- AND substring(ALIAS_0.fechadocumento,1,8)<= substring('20180123',1,8)
 AND ALIAS_0.ESTADOTR = 'C' 
 AND ALIAS_0.BO_PLACE_ID IS NOT NULL
 AND ALIAS_1.codigo not like 'VT13;VENTAS+;RES+;'
@@ -168,4 +190,4 @@ AND ALIAS_1.codigo not like 'VT09;RES+;'
 AND ALIAS_1.codigo not like 'VT14'
 AND ALIAS_1.codigo not like 'VT03'
 
-ORDER BY FECHA_DOCUMENTO DESC
+ORDER BY FECHA_DOCUMENTO ASC
