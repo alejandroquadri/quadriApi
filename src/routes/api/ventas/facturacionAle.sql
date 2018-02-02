@@ -13,6 +13,7 @@ SELECT 	  tr.numerodocumento as numero,
           -- tr.fechaactual as fecha,
           SUBSTRING(tr.fechaactual,5,2) mes,
           SUBSTRING(tr.fechaactual,1,4) anio,
+          itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
           Case 	tr.nota
                 WHEN 'A' THEN 'Responsable Inscripto'
@@ -71,6 +72,7 @@ SELECT    tr.numerodocumento as numero,
           SUBSTRING(tr.fechaactual,1,4) || SUBSTRING(tr.fechaactual,5,2) || SUBSTRING(tr.fechaactual,7,2) fecha,
           SUBSTRING(tr.fechaactual,5,2) as mes,
           SUBSTRING(tr.fechaactual,1,4) as anio,
+          itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
           Case  tr.nota
                 WHEN 'A' THEN 'Responsable Inscripto'
@@ -128,6 +130,7 @@ SELECT    tr.numerodocumento as numero,
           SUBSTRING(tr.fechaactual,1,4) || SUBSTRING(tr.fechaactual,5,2) || SUBSTRING(tr.fechaactual,7,2) fecha,
           SUBSTRING(tr.fechaactual,5,2) as mes,
           SUBSTRING(tr.fechaactual,1,4) as anio,
+          itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
           Case  tr.nota
                 WHEN 'A' THEN 'Responsable Inscripto'
