@@ -5,6 +5,7 @@ const moment = require("moment");
 
 const facturacionSQL = sql(__dirname, './facturacion.sql');
 const facturacionSQL3 = sql(__dirname, './facturacion3.sql');
+const facturacionSQLOk = sql(__dirname, './facturacionAle.sql');
 const psp = sql(__dirname, './presupuestos.sql');
 const docs = sql(__dirname, './docsVtas.sql');
 const precios = sql(__dirname, './lista-precios.sql')
@@ -27,11 +28,15 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.get('/2', function(req, res, next) {
+router.get('/ok/:start/:end', function(req, res, next) {
+  let start = req.params.start;
+  let finish = req.params.end;
+  console.log(start, finish);
   let today = moment();
-  let hasta = today.format('YYYYMMDD');
-  let desde = today.subtract(6, 'months').format('YYYYMMDD');
-  db.any(facturacionSQL3, {fechaDesde:desde, fechaHasta:hasta })
+  let hasta = today.format(finish);
+  let desde = today.format(start);  
+  // let desde = today.subtract(6, 'months').format('YYYYMMDD');
+  db.any(facturacionSQLOk, {fechaDesde:desde, fechaHasta:hasta })
   .then(function (data) {
     res.status(200)
       .json({
