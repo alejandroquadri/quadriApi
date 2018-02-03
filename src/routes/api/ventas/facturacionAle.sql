@@ -13,6 +13,7 @@ SELECT 	  tr.numerodocumento as numero,
           SUBSTRING(tr.fechaactual,5,2) mes,
           SUBSTRING(tr.fechaactual,1,4) anio,
           itr.cantidad2_cantidad as cantidad,
+          um.nombre as unidad_medida,
           itr.valor2_importe as precio,
           itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
@@ -47,6 +48,7 @@ LEFT JOIN (
           ) prod on prod.id = itr.referencia_id
 LEFT JOIN segmento seg on seg.id = prod.segmento_id 
 LEFT JOIN itemtipoclasificador itc on itc.id = seg.segmento5_id
+LEFT JOIN unidadmedida um on um.id = itr.unidadmedida_id
 
 -- WHERE     SUBSTRING(tr.fechaactual, 1, 8) >= SUBSTRING('20171201', 1, 8) 
 -- AND       SUBSTRING(tr.fechaactual, 1, 8) <= SUBSTRING('20171231', 1, 8)
@@ -73,6 +75,7 @@ SELECT    tr.numerodocumento as numero,
           SUBSTRING(tr.fechaactual,5,2) as mes,
           SUBSTRING(tr.fechaactual,1,4) as anio,
           itr.cantidad2_cantidad as cantidad,
+          um.nombre as unidad_medida,
           itr.valor2_importe as precio,
           itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
@@ -106,6 +109,7 @@ LEFT JOIN (
           ) prod on prod.id = itr.referencia_id
 LEFT JOIN segmento seg on seg.id = prod.segmento_id 
 LEFT JOIN itemtipoclasificador itc on itc.id = seg.segmento5_id
+LEFT JOIN unidadmedida um on um.id = itr.unidadmedida_id
 
 -- WHERE     SUBSTRING(tr.fechaactual, 1, 8) >= SUBSTRING('20171201', 1, 8)
 -- AND       SUBSTRING(tr.fechaactual, 1, 8) <= SUBSTRING('20171231', 1, 8)
@@ -132,6 +136,7 @@ SELECT    tr.numerodocumento as numero,
           SUBSTRING(tr.fechaactual,5,2) as mes,
           SUBSTRING(tr.fechaactual,1,4) as anio,
           itr.cantidad2_cantidad as cantidad,
+          um.nombre as unidad_medida,
           itr.valor2_importe as precio,
           itr.nombrereferencia as codigo,
           itr.descripcion as descripcion,
@@ -165,6 +170,7 @@ LEFT JOIN (
           ) prod on prod.id = itr.referencia_id
 LEFT JOIN segmento seg on seg.id = prod.segmento_id 
 LEFT JOIN itemtipoclasificador itc on itc.id = seg.segmento5_id
+LEFT JOIN unidadmedida um on um.id = itr.unidadmedida_id
 
 -- WHERE     SUBSTRING(tr.fechaactual, 1, 8) >= SUBSTRING('20171201', 1, 8)
 -- AND       SUBSTRING(tr.fechaactual, 1, 8) <= SUBSTRING('20171231', 1, 8)
