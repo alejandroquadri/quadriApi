@@ -2,6 +2,8 @@ const router = require('express').Router();
 import { db } from '../../../db';
 import { sql } from '../../../dbHelper';
 const moment = require("moment");
+let google = require('googleapis');
+let authentication = require("../../../googleApi");
 
 const facturacionSQL = sql(__dirname, './facturacion.sql');
 const facturacionSQL3 = sql(__dirname, './facturacion3.sql');
@@ -99,6 +101,28 @@ router.get('/precios', function(req, res, next) {
   .catch(function (err) {
     return next(err);
   });
+});
+
+router.get('/objetivos', function(req, res, next) {
+	authentication.authenticate().then((auth)=>{
+    var sheets = google.sheets('v4');
+	  sheets.spreadsheets.values.get({
+	    auth: auth,
+	    spreadsheetId: '1pQvRE_o81Td4w9c6ZRf1lot5GzAv_WPVv7XXrUgyAxM',
+      range: 'ObjComisiones!C1:C2'
+	  }, (error, response) => {
+	  	if (error) {
+	  		console.log('error en funcion google', error);
+	  		return next(error);
+	    }
+	  	res.status(200)
+			.json({
+		    status: 'success',
+		    message: 'Data from SS objectives',
+		    data: response.values
+		  });
+	  });
+	});
 });
 
 module.exports = router;
