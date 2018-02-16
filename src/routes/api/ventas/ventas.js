@@ -5,18 +5,16 @@ const moment = require("moment");
 let google = require('googleapis');
 let authentication = require("../../../googleApi");
 
-const facturacionSQL = sql(__dirname, './facturacion.sql');
-const facturacionSQL3 = sql(__dirname, './facturacion3.sql');
-const facturacionSQLOk = sql(__dirname, './facturacionAle.sql');
+const facturacionSQLOk = sql(__dirname, './facturacion.sql');
 const psp = sql(__dirname, './presupuestos.sql');
 const docs = sql(__dirname, './docsVtas.sql');
-const precios = sql(__dirname, './lista-precios.sql')
+const precios = sql(__dirname, './lista-precios-stock.sql')
 
 router.get('/', function(req, res, next) {
   let today = moment();
   let hasta = today.format('YYYYMMDD');
   let desde = today.subtract(6, 'months').format('YYYYMMDD');
-  db.any(facturacionSQL, {fechaDesde:desde, fechaHasta:hasta })
+  db.any(facturacionSQLOk, {fechaDesde:desde, fechaHasta:hasta })
   .then(function (data) {
     res.status(200)
       .json({
