@@ -6,5 +6,6 @@ router.use('/stock', require('./stock/stock'));
 router.use('/np', require('./npPendientes/npPendientes'));
 router.use('/entregas', require('./entregas-prog/entregas-prog'));
 router.use('/finanzas', require('./finanzas/finanzas'));
+router.use('/contabilidad', require('./contabilidad/contabilidad'));
 
 module.exports = router;
