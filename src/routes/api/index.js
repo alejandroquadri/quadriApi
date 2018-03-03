@@ -1,5 +1,8 @@
 var router = require('express').Router();
 
+router.get('/', (req, res) => {
+  res.status(200).send('Anda').end();
+});
 router.use('/ventas', require('./ventas/ventas'));
 router.use('/despachos', require('./despachos/despachos'));
 router.use('/stock', require('./stock/stock'));
