@@ -4,6 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
+    "start": "node ./build/app.js",
     "startMac": "NODE_ENV=production node ./build/app.js",
     "startWin": "$env:NODE_ENV='production'; node ./build/app.js"
   },
