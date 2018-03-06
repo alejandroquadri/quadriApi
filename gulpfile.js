@@ -30,12 +30,18 @@ gulp.task('jsonCopy', function () {
   return stream;
 });
 
-gulp.task('watch', ['compile', 'sqlCopy', 'jsonCopy'], function () {
+gulp.task('htmlCopy', function () {
+  var stream = gulp.src('./src/**/*.html')
+    .pipe(gulp.dest('./build'));
+  return stream;
+});
+
+gulp.task('watch', ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy'], function () {
   var stream = nodemon({
     script: './build/app.js', // run ES5 code
     watch: 'src', // watch ES2015 code
     ext: 'js sql',
-    tasks: ['compile', 'sqlCopy'] // compile synchronously onChange
+    tasks: ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy'] // compile synchronously onChange
   });
 
   return stream;
