@@ -29,7 +29,8 @@ router.post('/', function(req, res, next) {
     razSoc: pspData.razSoc,
     date: date,
     salesRep: pspData.salesRep,
-    total: decimal(Number(pspData.total), 0)
+    total: decimal(Number(pspData.total), 0),
+    payment: pspData.items[0].tipo_pago,
   }
 
   let items = '';
@@ -98,8 +99,14 @@ function decimal(value, fractionSize) {
 }
 
 function htmlItem(item) {
-  let cantidad = decimal(item.cantidad, 1);
-  console.log(item.cantidad, cantidad);
+  let bonificacion
+  if (Number(item.importe_bonificado) !== 0) {
+    bonificacion = decimal((item.importe_bonificado/(item.cantidad*item.precio)*100), 1)
+  } else {
+    bonificacion = 0;
+  }
+  console.log(item.importe_bonificado, bonificacion);
+
   let itemRow = `
   <tr>
     <td style="width: 220px;">
@@ -109,10 +116,13 @@ function htmlItem(item) {
       ${decimal(item.cantidad, 1)}
     </td>
     <td align="center">
+      ${item.unidad}
+    </td>
+    <td align="center">
       ${decimal(item.precio, 1)}
     </td>
     <td align="center">
-      ${decimal((item.importe_bonificado/(item.cantidad*item.precio)*100), 1)}%
+      ${bonificacion} %
     </td>
     <td align="center">
       ${decimal(item.precio, 1)}
