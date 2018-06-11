@@ -12,5 +12,6 @@ router.use('/finanzas', require('./finanzas/finanzas'));
 router.use('/contabilidad', require('./contabilidad/contabilidad'));
 
 router.use('/google-auth', require('./google-auth'));
+router.use('/email', require('./email/email-psp'));
 
 module.exports = router;

@@ -36,12 +36,24 @@ gulp.task('htmlCopy', function () {
   return stream;
 });
 
-gulp.task('watch', ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy'], function () {
+gulp.task('cssCopy', function () {
+  var stream = gulp.src('./src/**/*.css')
+    .pipe(gulp.dest('./build'));
+  return stream;
+});
+
+gulp.task('imageCopy', function () {
+  var stream = gulp.src('./src/**/*.jpg')
+    .pipe(gulp.dest('./build'));
+  return stream;
+});
+
+gulp.task('watch', ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'], function () {
   var stream = nodemon({
     script: './build/app.js', // run ES5 code
     watch: 'src', // watch ES2015 code
-    ext: 'js sql',
-    tasks: ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy'] // compile synchronously onChange
+    ext: 'js sql html css',
+    tasks: ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'] // compile synchronously onChange
   });
 
   return stream;
