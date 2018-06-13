@@ -105,7 +105,6 @@ function htmlItem(item) {
   } else {
     bonificacion = 0;
   }
-  console.log(item.importe_bonificado, bonificacion);
 
   let itemRow = `
   <tr>
@@ -113,7 +112,7 @@ function htmlItem(item) {
       ${item.conceptocomercial}
     </td>
     <td align="center">
-      ${decimal(item.cantidad, 1)}
+      ${decimal(item.cantidad, 2)}
     </td>
     <td align="center">
       ${item.unidad}
@@ -132,39 +131,7 @@ function htmlItem(item) {
     </td>
   </tr>
   `;
-  console.log(itemRow);
   return itemRow;
 }
 
 module.exports = router;
-
-// cc
-// :
-// "alejandroquadri@quadri.com.ar"
-// currentEmail
-// :
-// "alejandroquadri@quadri.com.ar"
-// date
-// :
-// "2018/06/06"
-// items
-// :
-// (2) [{…}, {…}]
-// number
-// :
-// "00010885"
-// obs
-// :
-// ""
-// razSoc
-// :
-// "CONSTRUMEX S.A."
-// salesRep
-// :
-// "Tarruella Alberto Horacio "
-// to
-// :
-// "alejandroquadri@quadri.com.ar"
-// total
-// :
-// 556410

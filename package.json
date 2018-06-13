@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build/app.js",
     "startMac": "NODE_ENV=production node ./build/app.js",
-    "startWin": "$env:NODE_ENV='production'; node ./build/app.js"
+    "startWin": "set NODE_ENV=production&&npm start"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
