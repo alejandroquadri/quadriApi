@@ -11,8 +11,8 @@ const styliner = new Styliner(__dirname);
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'alejandroquadri@quadri.com.ar',
-    pass: 'vamoscuba1304',
+    user: 'presupuestos@quadri.com.ar',
+    pass: 'Quadri384',
   },
 });
 
@@ -53,11 +53,11 @@ router.post('/', function(req, res, next) {
     styliner.processHTML(JSresult)
     .then( processedSource => {
 
-      // let template = Handlebars.compile(processedSource);
-      // let result = template(psp);
       const mailOptions = {
-        from: '"Quadri" <info@quadri.com.ar>',
-        cc: psp.cc || '',
+        from: `"Quadri" <${pspData.currentEmail}>`,
+        sender: pspData.currentEmail,
+        replyTo: pspData.currentEmail,
+        cc: [pspData.currentEmail, psp.cc || ''],
         to: psp.to,
         subject: `Quadri - Presupuesto ${psp.number}`,
         text: 'Version texto',
