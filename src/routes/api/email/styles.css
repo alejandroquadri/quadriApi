@@ -65,6 +65,10 @@ tr.headerTable td {
   line-height: 22px;
 }
 
+.obs {
+  padding-top: 10px;
+}
+
 .pspTable {
   font-family: sans-serif;
   font-size: 12px; 
