@@ -123,7 +123,7 @@ function htmlItem(item) {
       ${decimal(item.precio, 1)}
     </td>
     <td align="center">
-      ${decimal(bonificacion*100, 1)} %
+      ${decimal(bonificacion*100, 1) || 0} %
     </td>
     <td align="center">
       ${decimal(prBon, 1)}
