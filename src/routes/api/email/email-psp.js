@@ -99,11 +99,13 @@ function decimal(value, fractionSize) {
 }
 
 function htmlItem(item) {
-  let bonificacion
+  let bonificacion, prBon;
   if (Number(item.importe_bonificado) !== 0) {
-    bonificacion = decimal((item.importe_bonificado/(item.cantidad*item.precio)*100), 1)
+    bonificacion = item.importe_bonificado/(item.cantidad*item.precio);
+    prBon = item.precio * (1- bonificacion)
   } else {
     bonificacion = 0;
+    prBon = item.precio;
   }
 
   let itemRow = `
@@ -121,10 +123,10 @@ function htmlItem(item) {
       ${decimal(item.precio, 1)}
     </td>
     <td align="center">
-      ${bonificacion} %
+      ${decimal(bonificacion*100, 1)} %
     </td>
     <td align="center">
-      ${decimal(item.precio, 1)}
+      ${decimal(prBon, 1)}
     </td>
     <td align="center">
       ${decimal(item.total_importe, 0)}
