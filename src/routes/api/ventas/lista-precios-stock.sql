@@ -1,4 +1,5 @@
 SELECT  LPRECIO.CODIGO codigo, 
+        PROD.activestatus status,
         PROD.rubro_id,
         RUBROS.nombrerubro,
         RUBROS.detalle,
@@ -77,16 +78,20 @@ LEFT JOIN V_CODIGOALTERNATIVO ALIAS_1 ON LPRECIO.CODIGOALTERNATIVO_ID = ALIAS_1.
 LEFT JOIN V_UNIDADFINANCIERA MONEDA ON LPRECIO.VALOR2_UNIDADVALORIZACION_ID = MONEDA.ID   
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON LPRECIO.DCANTIDAD2_UNIDADMEDIDA_ID = UNIDADES.ID  
 LEFT JOIN (
-            SELECT  id, segmento_id, codigo, rubro_id
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    producto
             UNION
-            SELECT  id, segmento_id, codigo, rubro_id
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    Servicio
             UNION
-            SELECT  id, segmento_id, codigo, rubro_id
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    ConceptoContable
           ) PROD on LPRECIO.codigo = PROD.codigo
 LEFT JOIN RUBRO RUBROS ON PROD.rubro_id = RUBROS.id
 LEFT JOIN SEGMENTO ON PROD.SEGMENTO_ID = SEGMENTO.ID 
 
-WHERE LPRECIO.BO_PLACE_ID = '{0724B015-1856-4450-8F59-07BC183F892E}'   
+WHERE LPRECIO.BO_PLACE_ID = '{0724B015-1856-4450-8F59-07BC183F892E}'
+AND  LPRECIO.ACTIVESTATUS = 0
+AND  PROD.ACTIVESTATUS = 0
+
+order by codigo
