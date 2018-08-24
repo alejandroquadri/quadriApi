@@ -86,7 +86,7 @@ LEFT JOIN (
             UNION
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    ConceptoContable
-          ) PROD on LPRECIO.codigo = PROD.codigo
+          ) PROD on LPRECIO.referencia_id = PROD.id
 LEFT JOIN RUBRO RUBROS ON PROD.rubro_id = RUBROS.id
 LEFT JOIN SEGMENTO ON PROD.SEGMENTO_ID = SEGMENTO.ID 
 
