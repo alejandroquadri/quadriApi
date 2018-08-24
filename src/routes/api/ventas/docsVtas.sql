@@ -43,11 +43,6 @@ LEFT JOIN V_TIPOPAGO ALIAS_16 ON ALIAS_5.TIPOPAGO_ID = ALIAS_16.ID
 LEFT JOIN V_PROYECTO ALIAS_12 ON ALIAS_0.PROYECTO_ID = ALIAS_12.ID
 LEFT JOIN V_CONCEPTOCOMERCIAL ALIAS_9 ON ALIAS_0.REFERENCIA_ID = ALIAS_9.ID
 LEFT JOIN V_CENTROCOSTOS ALIAS_10 ON ALIAS_0.CENTROCOSTOS_ID = ALIAS_10.ID
-LEFT JOIN producto b on ALIAS_0.nombrereferencia = b.codigo
-LEFT JOIN segmento seg on b.segmento_id = seg.id
-LEFT JOIN segmento seg on b.segmento_id = seg.id
-LEFT JOIN segmento seg on b.segmento_id = seg.id
--- LEFT JOIN segmento seg on b.segmento_id = seg.id
 LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_producto
@@ -58,6 +53,7 @@ LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_conceptocontable
           ) b on ALIAS_0.referencia_id = b.id
+LEFT JOIN segmento seg on b.segmento_id = seg.id
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON ALIAS_0.UNIDADMEDIDA_ID = UNIDADES.ID 
 LEFT JOIN (
             SELECT id, boextension_id FROM V_TRFACTURAVENTA
@@ -151,7 +147,6 @@ LEFT JOIN V_TIPOPAGO ALIAS_16 ON ALIAS_5.TIPOPAGO_ID = ALIAS_16.ID
 LEFT JOIN V_PROYECTO ALIAS_12 ON ALIAS_0.PROYECTO_ID = ALIAS_12.ID
 LEFT JOIN V_CONCEPTOCOMERCIAL ALIAS_9 ON ALIAS_0.REFERENCIA_ID = ALIAS_9.ID
 LEFT JOIN V_CENTROCOSTOS ALIAS_10 ON ALIAS_0.CENTROCOSTOS_ID = ALIAS_10.ID
-LEFT JOIN producto b on ALIAS_0.nombrereferencia = b.codigo
 LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_producto
@@ -162,6 +157,7 @@ LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_conceptocontable
           ) b on ALIAS_0.referencia_id = b.id
+LEFT JOIN segmento seg on b.segmento_id = seg.id
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON ALIAS_0.UNIDADMEDIDA_ID = UNIDADES.ID
 LEFT JOIN (
             SELECT id, boextension_id FROM V_TRFACTURAVENTA
@@ -258,7 +254,6 @@ LEFT JOIN V_TIPOPAGO ALIAS_16 ON ALIAS_5.TIPOPAGO_ID = ALIAS_16.ID
 LEFT JOIN V_PROYECTO ALIAS_12 ON ALIAS_0.PROYECTO_ID = ALIAS_12.ID
 LEFT JOIN V_CONCEPTOCOMERCIAL ALIAS_9 ON ALIAS_0.REFERENCIA_ID = ALIAS_9.ID
 LEFT JOIN V_CENTROCOSTOS ALIAS_10 ON ALIAS_0.CENTROCOSTOS_ID = ALIAS_10.ID
-LEFT JOIN producto b on ALIAS_0.nombrereferencia = b.codigo
 LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_producto
@@ -269,6 +264,7 @@ LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_conceptocontable
           ) b on ALIAS_0.referencia_id = b.id
+LEFT JOIN segmento seg on b.segmento_id = seg.id
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON ALIAS_0.UNIDADMEDIDA_ID = UNIDADES.ID
 LEFT JOIN (
             SELECT id, boextension_id FROM V_TRFACTURAVENTA
@@ -381,7 +377,6 @@ LEFT JOIN V_TIPOPAGO ALIAS_16 ON ALIAS_5.TIPOPAGO_ID = ALIAS_16.ID
 LEFT JOIN V_PROYECTO ALIAS_12 ON ALIAS_0.PROYECTO_ID = ALIAS_12.ID
 LEFT JOIN V_CONCEPTOCOMERCIAL ALIAS_9 ON ALIAS_0.REFERENCIA_ID = ALIAS_9.ID
 LEFT JOIN V_CENTROCOSTOS ALIAS_10 ON ALIAS_0.CENTROCOSTOS_ID = ALIAS_10.ID
-LEFT JOIN producto b on ALIAS_0.nombrereferencia = b.codigo
 LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_producto
@@ -392,6 +387,7 @@ LEFT JOIN (
             SELECT  id, segmento_id, codigo, rubro_id, activestatus
             FROM    v_conceptocontable
           ) b on ALIAS_0.referencia_id = b.id
+LEFT JOIN segmento seg on b.segmento_id = seg.id
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON ALIAS_0.UNIDADMEDIDA_ID = UNIDADES.ID
 LEFT JOIN (
             SELECT id, boextension_id FROM V_TRFACTURAVENTA
