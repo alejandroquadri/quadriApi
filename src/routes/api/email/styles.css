@@ -77,6 +77,10 @@ tr.headerTable td {
   padding: 20px 0 20px 0
 }
 
+.heading {
+  font-weight: bold;
+}
+
 .button {
   text-align: center; 
   font-size: 18px; 
