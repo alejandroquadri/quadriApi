@@ -67,6 +67,7 @@ tr.headerTable td {
 
 .obs {
   padding-top: 10px;
+  white-space: pre-wrap; 
 }
 
 .pspTable {
