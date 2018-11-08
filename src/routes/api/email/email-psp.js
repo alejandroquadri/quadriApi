@@ -21,6 +21,9 @@ router.post('/', function(req, res, next) {
   const pspData = req.body;
   let date = moment(pspData.date, "YYYY/MM/DD").format('DD/MM/YYYY');
 
+  let iibb;
+  pspData.iibb === 0 ? iibb = '0' : iibb = decimal(Number(pspData.iibb), 0);
+
   let psp = {
     to: pspData.to,
     cc: pspData.cc,
@@ -30,6 +33,9 @@ router.post('/', function(req, res, next) {
     date: date,
     salesRep: pspData.salesRep,
     total: decimal(Number(pspData.total), 0),
+    iva: decimal(Number(pspData.iva), 0),
+    iibb: iibb,
+    final: decimal(Number(pspData.final), 0),
     payment: pspData.items[0].tipo_pago,
   }
 

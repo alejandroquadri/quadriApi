@@ -21,7 +21,11 @@ SELECT  ALIAS_0.NOMBRETR TRANSACCION,
         gv.descripcion AS origen,
         seg.nombre5 AS MARCA,
         UNIDADES.NOMBRE unidad,
-        '' AS tipo_pago
+        '' AS tipo_pago,
+        ALIAS_5.valortotal total_transaccion,
+        (ALIAS_5.valortotal - ALIAS_5.subtotalimporte -tImp.valorimporte) Iva,
+        tImp.valorimporte IIBBtr,
+        tiImp.valorimporte IVAitem
 
 FROM V_ITEMVENTA ALIAS_0
 
@@ -80,11 +84,14 @@ LEFT JOIN (
           ) UD ON TRF.BOEXTENSION_ID = UD.ID
 
 LEFT JOIN grupovistas GV ON GV.id = UD.origenFV_id
+LEFT JOIN v_impuestotransaccion tImp ON ALIAS_5.impuestostransaccion_id = tImp.bo_place_id
+LEFT JOIN v_impuestotransaccion tiImp ON ALIAS_0.impuestositemtransaccion_id = tiImp.bo_place_id
 
 WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL
 
 AND substring(alias_0.fechadocumento,1,8) >= substring(${fechaDesde},1,8)
 AND substring(alias_0.fechadocumento,1,8)<= substring(${fechaHasta},1,8)
+
 
 -- AND substring(alias_0.fechadocumento,1,8) >= substring('20180101',1,8)
 -- AND substring(alias_0.fechadocumento,1,8) <= substring('20180131',1,8)
@@ -126,7 +133,11 @@ SELECT  ALIAS_0.NOMBRETR TRANSACCION,
         gv.descripcion as origen,
         seg.nombre5 as MARCA,
         UNIDADES.NOMBRE unidad,
-        '' AS tipo_pago
+        '' AS tipo_pago,
+        ALIAS_5.valortotal total_transaccion,
+        (ALIAS_5.valortotal - ALIAS_5.subtotalimporte -tImp.valorimporte) Iva,
+        tImp.valorimporte IIBBtr,
+        tiImp.valorimporte IVAitem
 
 FROM      V_ITEMVENTA ALIAS_0
 LEFT JOIN V_TIPOTRANSACCION ALIAS_1 ON ALIAS_0.TIPOTRANSACCION_ID = ALIAS_1.ID
@@ -184,6 +195,8 @@ LEFT JOIN (
           ) UD ON TRF.BOEXTENSION_ID = UD.ID
 
 LEFT JOIN grupovistas GV on GV.id = UD.origenFV_id
+LEFT JOIN v_impuestotransaccion tImp ON ALIAS_5.impuestostransaccion_id = tImp.bo_place_id
+LEFT JOIN v_impuestotransaccion tiImp ON ALIAS_0.impuestositemtransaccion_id = tiImp.bo_place_id
 
 WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL
 
@@ -233,7 +246,11 @@ SELECT  ALIAS_0.NOMBRETR TRANSACCION,
         gv.descripcion as origen,
         seg.nombre5 as MARCA,
         UNIDADES.NOMBRE unidad,
-        tipopago.observacion AS tipo_pago
+        tipopago.observacion AS tipo_pago,
+        ALIAS_5.valortotal total_transaccion,
+        (ALIAS_5.valortotal - ALIAS_5.subtotalimporte -tImp.valorimporte) Iva,
+        tImp.valorimporte IIBBtr,
+        tiImp.valorimporte IVAitem
 
 FROM      V_ITEMVENTA ALIAS_0
 LEFT JOIN V_TIPOTRANSACCION ALIAS_1 ON ALIAS_0.TIPOTRANSACCION_ID = ALIAS_1.ID
@@ -291,6 +308,8 @@ LEFT JOIN (
           ) UD ON TRF.BOEXTENSION_ID = UD.ID
 
 LEFT JOIN grupovistas GV on GV.id = UD.origenFV_id
+LEFT JOIN v_impuestotransaccion tImp ON ALIAS_5.impuestostransaccion_id = tImp.bo_place_id
+LEFT JOIN v_impuestotransaccion tiImp ON ALIAS_0.impuestositemtransaccion_id = tiImp.bo_place_id
 LEFT JOIN v_trpresupuestoventa tr_psp on ALIAS_0.PLACEOWNER_ID = tr_psp.id
 LEFT JOIN v_tipopago tipopago on tr_psp.tipopago_id = tipopago.id
 
@@ -349,7 +368,11 @@ SELECT  ALIAS_0.NOMBRETR TRANSACCION,
         gv.descripcion as origen,
         seg.nombre5 as MARCA,
         UNIDADES.NOMBRE unidad,
-        '' AS tipo_pago
+        '' AS tipo_pago,
+        ALIAS_5.valortotal total_transaccion,
+        (ALIAS_5.valortotal - ALIAS_5.subtotalimporte -tImp.valorimporte) Iva,
+        tImp.valorimporte IIBBtr,
+        tiImp.valorimporte IVAitem
 
 /*,
         Case when p.saldada = 'F' then 'Pendiente'
@@ -414,6 +437,8 @@ LEFT JOIN (
           ) UD ON TRF.BOEXTENSION_ID = UD.ID
 
 LEFT JOIN grupovistas GV on GV.id = UD.origenFV_id
+LEFT JOIN v_impuestotransaccion tImp ON ALIAS_5.impuestostransaccion_id = tImp.bo_place_id
+LEFT JOIN v_impuestotransaccion tiImp ON ALIAS_0.impuestositemtransaccion_id = tiImp.bo_place_id
 
 WHERE ALIAS_0.PLACEOWNER_ID IS NOT NULL
 
@@ -464,6 +489,11 @@ GROUP BY  codigocc,
           ALIAS_0.TOTAL2_IMPORTE ,
           gv.descripcion,
           seg.nombre5,
-          UNIDADES.NOMBRE
+          UNIDADES.NOMBRE,
+          total_transaccion,
+          Iva,
+          IVAitem,
+          IIBBtr
+          
 
 ORDER BY transaccion

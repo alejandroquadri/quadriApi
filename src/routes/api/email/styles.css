@@ -54,6 +54,14 @@ tr.headerTable td {
   border-bottom: 1px solid #f2eeed;
 }
 
+.footerTable {
+  border-top: 1px solid #f2eeed;
+}
+
+table.pspTable td {
+  line-height: 2;
+}
+
 .h2 {
   padding: 0 0 5px 0; 
   font-size: 14px; 
