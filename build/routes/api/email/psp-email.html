@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!-- Explicacion de como armar este html en https://webdesign.tutsplus.com/articles/creating-a-simple-responsive-html-email--webdesign-12978 -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>psp email</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+  </head>
+  
+  <body yahoo>
+
+    <!--[if (gte mso 9)|(IE)]>
+    <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td>
+              <![endif]-->
+              <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                
+                <!-- Fila con imagen, parrafo al lado y boton debajo -->
+                <tr>
+                  <td class="header borderbottom">
+                    <table width="115" align="left" border="0" cellpadding="0" cellspacing="0">  
+                      <tr>
+                        <td height="115" style="padding: 0 20px 0px 0;">
+                          <img src="https://firebasestorage.googleapis.com/v0/b/repmant-ce7a5.appspot.com/o/images-quadri%2FLogo%20Quadri%201024.png?alt=media&token=869359f7-88de-43af-aade-53e648743942" width="115" height="115" border="0" alt="" />
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <!-- Fila con titulo y parrafo debajo -->
+                <tr>
+                    <td class="innerpadding borderbottom">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                              <td class="h2">
+                                  {{ date }} - Presupuesto n°{{ number }}
+                              </td>
+                            </tr>
+                            <tr>
+                                <td class="h2">
+                                  {{ razSoc }}
+                                </td>
+                              </tr>
+                            <tr>
+                              <td class="h2">
+                                Vendedor: {{ salesRep }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pspTable">
+                                  <tr class="headerTable">
+                                    <td class="heading" align="center">
+                                      Codigo - Descripcion
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Cantidad
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Unidad
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Precio
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Dto
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Pr Dto
+                                    </td>
+                                    <td class="heading" align="center">
+                                      Total
+                                    </td>
+                                  </tr>
+                                  <!-- el triple {} hace que se inserte el string como html -->
+                                  {{{ items }}}
+                                  <tr>
+                                    <td class="footerTable">
+                                    </td>
+                                    <td align="center" class="footerTable">
+                                    </td>
+                                    <td align="center" class="footerTable">
+                                    </td>
+                                    <td align="center" class="footerTable">
+                                    </td>
+                                    <td align="center" class="footerTable">
+                                    </td>
+                                    <td class="heading footerTable" align="center">Total
+                                    </td>
+                                    <td align="center" class="footerTable">
+                                      {{ total }}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td class="heading" align="center">IVA
+                                    </td>
+                                    <td align="center">
+                                      {{ iva }}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td class="heading" align="center">P. IIBB
+                                    </td>
+                                    <td align="center">
+                                      {{ iibb }}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td align="center">
+                                    </td>
+                                    <td class="heading" align="center">Final
+                                    </td>
+                                    <td align="center">
+                                      {{ final }}
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="bodycopy">
+                                Forma de pago: {{ payment }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="bodycopy obs">{{ obs }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Pie -->
+                <tr>
+                  <td class="footer">
+                      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                          <td align="center" class="footercopy">
+                            Eugenio P. Quadri Y CIA SACIFIA, Gascon 483, CABA<br/>
+                            +54 11 4861 0450 <br>
+                            www.quadri.com.ar
+                          </td>
+                        </tr>
+                        <tr>
+                          <td align="center" style="padding: 20px 0 0 0;">
+                            <table border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                  <a href="http://www.facebook.com/quadrisa">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/repmant-ce7a5.appspot.com/o/images-quadri%2Ffacebook_monochrome_logo.png?alt=media&token=35671412-6c62-4daf-b24f-86d7d7bdd34f" width="37" height="37" alt="Facebook" border="0" />
+                                  </a>
+                                </td>
+                                <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+                                  <a href="http://www.twitter.com/">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/repmant-ce7a5.appspot.com/o/images-quadri%2Finstagram_monochrome_logo.png?alt=media&token=cbd9147d-e377-41cf-b9db-355382aa32d7" width="37" height="37" alt="Twitter" border="0" />
+                                  </a>
+                                </td>
+                              </tr>
+                            </table>
+                          </td>
+                        </tr>
+                      </table>
+                  </td>
+                </tr>
+
+              </table>
+            <!--[if (gte mso 9)|(IE)]>
+          </td>
+      </tr>
+    </table>
+    <![endif]-->
+
+  </body>
+</html>
