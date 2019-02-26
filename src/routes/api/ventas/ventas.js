@@ -29,6 +29,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/facturacion/:start/:end', function(req, res, next) {
+  // cambio
   let start = req.params.start;
   let finish = req.params.end;
   console.log(start, finish);
