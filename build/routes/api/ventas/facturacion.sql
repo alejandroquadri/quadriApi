@@ -1,5 +1,5 @@
 -- trae facturas
-SELECT 	  tr.numerodocumento as numero,
+SELECT    tr.numerodocumento as numero,
           tr.nombreoriginante as vendedor,
           tr.nombredestinatario as cliente,	
           'Factura' as transaccion,

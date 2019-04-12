@@ -14,6 +14,7 @@ var _moment2 = _interopRequireDefault(_moment);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* eslint-disable no-console */
 var router = _express2.default.Router();
 
 var balanceSQL = (0, _dbHelper.sql)(__dirname, './balance.sql');
