@@ -48,7 +48,7 @@ gulp.task('imageCopy', function () {
   return stream;
 });
 
-gulp.task('watch', gulp.parallel(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'], function () {
+gulp.task('watch', gulp.series(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'], function () {
   var stream = nodemon({
     script: './build/app.js', // run ES5 code
     watch: 'src', // watch ES2015 code
