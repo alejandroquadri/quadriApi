@@ -6,13 +6,12 @@ var _dbHelper = require('../../../dbHelper');
 
 var router = require('express').Router();
 var moment = require('moment');
-var google = require('googleapis');
-var authentication = require('../../../googleApi');
 
 var facturacion = (0, _dbHelper.sql)(__dirname, './facturacion.sql');
 var psp = (0, _dbHelper.sql)(__dirname, './presupuestos.sql');
 var docs = (0, _dbHelper.sql)(__dirname, './docsVtas.sql');
 var precios = (0, _dbHelper.sql)(__dirname, './lista-precios-stock.sql');
+var docsImp = (0, _dbHelper.sql)(__dirname, './docs-imp.sql');
 
 router.get('/', function (req, res, next) {
   var today = moment();
@@ -91,24 +90,18 @@ router.get('/precios', function (req, res, next) {
   });
 });
 
-router.get('/objetivos', function (req, res, next) {
-  authentication.authenticate().then(function (auth) {
-    var sheets = google.sheets('v4');
-    sheets.spreadsheets.values.get({
-      auth: auth,
-      spreadsheetId: '1pQvRE_o81Td4w9c6ZRf1lot5GzAv_WPVv7XXrUgyAxM',
-      range: 'ObjComisiones!C1:C2'
-    }, function (error, response) {
-      if (error) {
-        // console.log('error en funcion google', error);
-        return next(error);
-      }
-      res.status(200).json({
-        status: 'success',
-        message: 'Data from SS objectives',
-        data: response.values
-      });
+router.get('/docs-imp', function (req, res, next) {
+  console.log('llega a la consulta');
+  _db.db.any(docsImp).then(function (data) {
+    console.log('vuelve de db');
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'Retrieved docs'
     });
+  }).catch(function (err) {
+    console.log('error en db', err);
+    return next(err);
   });
 });
 

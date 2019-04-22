@@ -8,7 +8,7 @@ var Cache = require('gulp-file-cache');
 
 var cache = new Cache();
 
-gulp.task('compile', function () {
+gulp.task('compile', () => {
   var stream = gulp.src('./src/**/*.js') // your ES2015 code
     .pipe(cache.filter()) // remember files
     .pipe(print()) 
@@ -18,47 +18,46 @@ gulp.task('compile', function () {
   return stream; // important for gulp-nodemon to wait for completion
 });
 
-gulp.task('sqlCopy', function () {
+gulp.task('sqlCopy', () => {
   var stream = gulp.src('./src/**/*.sql')
     .pipe(gulp.dest('./build'));
   return stream;
 });
 
-gulp.task('jsonCopy', function () {
+gulp.task('jsonCopy', () => {
   var stream = gulp.src('./src/**/*.json')
     .pipe(gulp.dest('./build'));
   return stream;
 });
 
-gulp.task('htmlCopy', function () {
+gulp.task('htmlCopy', () => {
   var stream = gulp.src('./src/**/*.html')
     .pipe(gulp.dest('./build'));
   return stream;
 });
 
-gulp.task('cssCopy', function () {
+gulp.task('cssCopy', () => {
   var stream = gulp.src('./src/**/*.css')
     .pipe(gulp.dest('./build'));
   return stream;
 });
 
-gulp.task('imageCopy', function () {
+gulp.task('imageCopy', () => {
   var stream = gulp.src('./src/**/*.jpg')
     .pipe(gulp.dest('./build'));
   return stream;
 });
 
-gulp.task('watch', gulp.series(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'], function () {
+gulp.task('watch', gulp.series(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'],  () => {
   var stream = nodemon({
     script: './build/app.js', // run ES5 code
     watch: 'src', // watch ES2015 code
     ext: 'js sql html css',
     tasks: ['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy'] // compile synchronously onChange
   });
-
   return stream;
 }));
 
-gulp.task('default', gulp.series(['watch']));
+gulp.task('default', gulp.parallel(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy']));
 
 

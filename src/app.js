@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -12,7 +13,6 @@ var isProduction = process.env.NODE_ENV === 'production';
 var app = express();
 
 const db = require('./db'); // your db module
-// const google = require('./googleApi');
 
 // esto para que asigne correctamente los headers
 app.use(cors());
@@ -52,7 +52,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   res.status(err.status || 500)
   .json({
     status: 'error',

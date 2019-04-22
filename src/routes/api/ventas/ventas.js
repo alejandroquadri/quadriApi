@@ -2,13 +2,12 @@ import { db } from '../../../db';
 import { sql } from '../../../dbHelper';
 const router = require('express').Router();
 const moment = require('moment');
-let google = require('googleapis');
-let authentication = require('../../../googleApi')
 
 const facturacion = sql(__dirname, './facturacion.sql');
 const psp = sql(__dirname, './presupuestos.sql')
 const docs = sql(__dirname, './docsVtas.sql')
 const precios = sql(__dirname, './lista-precios-stock.sql')
+const docsImp = sql(__dirname, './docs-imp.sql')
 
 router.get('/', function(req, res, next) {
   let today = moment()
@@ -102,26 +101,22 @@ router.get('/precios', function(req, res, next) {
   });
 });
 
-router.get('/objetivos', function(req, res, next) {
-	authentication.authenticate().then((auth)=>{
-    var sheets = google.sheets('v4');
-    sheets.spreadsheets.values.get({
-      auth: auth,
-      spreadsheetId: '1pQvRE_o81Td4w9c6ZRf1lot5GzAv_WPVv7XXrUgyAxM',
-      range: 'ObjComisiones!C1:C2'
-    }, (error, response) => {
-      if (error) {
-        // console.log('error en funcion google', error);
-        return next(error);
-      }
-      res.status(200)
+router.get('/docs-imp', function(req, res, next) {
+  console.log('llega a la consulta');
+  db.any(docsImp)
+  .then(function (data) {
+    console.log('vuelve de db');
+    res.status(200)
       .json({
         status: 'success',
-        message: 'Data from SS objectives',
-        data: response.values
+        data: data,
+        message: 'Retrieved docs'
       });
-    });
-	});
+  })
+  .catch(function (err) {
+    console.log('error en db', err);
+    return next(err);
+  });
 });
 
 module.exports = router
