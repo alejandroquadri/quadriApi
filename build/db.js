@@ -9,21 +9,21 @@ var options = {
 
 var pgp = require('pg-promise')(options);
 
-// const config = {
-//     host: '192.168.0.205',
-//     port: 5432,
-//     database: 'QP20190325',
-//     user: 'calipso',
-//     password: 'calipso'
-// };
-
 var config = {
     host: '192.168.0.205',
     port: 5432,
-    database: 'QUADRIBDN',
+    database: 'QP20190325',
     user: 'calipso',
     password: 'calipso'
 };
+
+// const config = {
+//     host: '192.168.0.205',
+//     port: 5432,
+//     database: 'QUADRIBDN',
+//     user: 'calipso',
+//     password: 'calipso'
+// };
 
 // con direccion de bd desde internet
 // const config = {

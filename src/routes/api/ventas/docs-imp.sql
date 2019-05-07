@@ -5,7 +5,13 @@ SELECT 	item_venta.NOMBRETR TRANSACCION,
 		SUBSTRING(item_venta.FECHAENTREGA,1,4) ||'-'|| SUBSTRING(item_venta.FECHAENTREGA,5,2) ||'-'|| SUBSTRING(item_venta.FECHAENTREGA,7,2) FECHA_ENTREGA, 
 		item_venta.NUMERODOCUMENTO NUMERODOCUMENTO, 
 		item_venta.NOMBREORIGINANTETR NOMBREORIGINANTETR, 
-		item_venta.NOMBREDESTINATARIOTR NOMBREDESTINATARIOTR, 
+		item_venta.NOMBREDESTINATARIOTR NOMBREDESTINATARIOTR,
+		clientes.cuit cuit,
+		clientes.numerodocumento dni,
+		domicilios.calle calle,
+		ciudad.nombre ciudad,
+		domicilios.nombredomicilio domicilio,
+		tr_venta.detalle detalle,
 		moneda.NOMBRE MONEDA, 
 		tipo_transaccion.CODIGO CODIGO, 
 		concepto_comercial.CODIGO CODIGOCC, 
@@ -30,7 +36,10 @@ FROM 	V_ITEMVENTA item_venta
 
 LEFT JOIN V_TIPOTRANSACCION tipo_transaccion ON item_venta.TIPOTRANSACCION_ID = tipo_transaccion.ID 
 LEFT JOIN V_TRVENTA tr_venta ON item_venta.PLACEOWNER_ID = tr_venta.ID 
-LEFT JOIN V_MONEDA moneda ON tr_venta.MONEDA_ID = moneda.ID 
+LEFT JOIN V_MONEDA moneda ON tr_venta.MONEDA_ID = moneda.ID
+LEFT JOIN V_CLIENTE clientes ON tr_venta.destinatario_id = clientes.id
+LEFT JOIN V_DOMICILIO domicilios ON tr_venta.domicilio_id = domicilios.id
+LEFT JOIN V_CIUDAD ciudad ON domicilios.ciudad_id = ciudad.id
 LEFT JOIN V_FLAG flag ON tr_venta.FLAG_ID = flag.ID 
 LEFT JOIN V_CONCEPTOCOMERCIAL concepto_comercial ON item_venta.REFERENCIA_ID = concepto_comercial.ID 
 LEFT JOIN v_impuestotransaccion tImp ON tr_venta.impuestostransaccion_id = tImp.bo_place_id
