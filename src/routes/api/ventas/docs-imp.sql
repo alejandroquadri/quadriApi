@@ -48,11 +48,7 @@ LEFT JOIN V_UNIDADMEDIDA UNIDADES ON item_venta.UNIDADMEDIDA_ID = UNIDADES.ID
 	
 WHERE item_venta.PLACEOWNER_ID IS NOT NULL 
 
--- AND SUBSTRING(item_venta.fechadocumento,1,8) >= SUBSTRING(${fechaDesde},1,8)
--- AND SUBSTRING(item_venta.fechadocumento,1,8)<= SUBSTRING(${fechaHasta},1,8)
-
 AND SUBSTRING(item_venta.fechadocumento,1,8) >= SUBSTRING('20190101',1,8)
--- AND SUBSTRING(item_venta.fechadocumento,1,8)<= SUBSTRING('20190416',1,8)
 AND (
 		SUBSTRING(item_venta.NUMERODOCUMENTO,1,4) = '0001' 
 		or 
@@ -60,11 +56,12 @@ AND (
 	)
 AND item_venta.ESTADOTR = 'C'
 AND item_venta.BO_PLACE_ID IS NOT NULL
+AND item_venta.VALOR2_IMPORTE <> '0' -- para que no traiga precios en 0
 AND tipo_transaccion.codigo NOT LIKE 'VT01'  -- pedido a preparar
 AND tipo_transaccion.codigo NOT LIKE 'VT02'  -- NP
 AND tipo_transaccion.codigo NOT LIKE 'VT03' -- presupuesto
 AND tipo_transaccion.codigo NOT LIKE 'VT10;RES-;' --Nota de credito de venta interna
 AND tipo_transaccion.codigo NOT LIKE 'VT09;RES+;'  --Nota de Debito de Venta Interna
-AND tipo_transaccion.codigo NOT LIKE 'VT06;VENTAS-;RES-;' --Factura Anulada
+-- AND tipo_transaccion.codigo NOT LIKE 'VT06;VENTAS-;RES-;' --Factura Anulada
 
 ORDER BY FECHA_DOCUMENTO desc
