@@ -4,10 +4,11 @@ const router = require('express').Router();
 const moment = require('moment');
 
 const facturacion = sql(__dirname, './facturacion.sql');
-const psp = sql(__dirname, './presupuestos.sql')
-const docs = sql(__dirname, './docsVtas.sql')
-const precios = sql(__dirname, './lista-precios-stock.sql')
-const docsImp = sql(__dirname, './docs-imp.sql')
+const psp = sql(__dirname, './presupuestos.sql');
+const docs = sql(__dirname, './docsVtas.sql');
+const precios = sql(__dirname, './lista-precios-stock.sql');
+const docsImp = sql(__dirname, './docs-imp.sql');
+const citiVentas = sql(__dirname, './citi-ventas.sql');
 
 router.get('/', function(req, res, next) {
   let today = moment()
@@ -115,6 +116,26 @@ router.get('/docs-imp', function(req, res, next) {
   })
   .catch(function (err) {
     console.log('error en db', err);
+    return next(err);
+  });
+});
+
+router.get('/citi-ventas/:month', function(req, res, next) {
+  
+  let dateMonth = moment(req.params.month);
+  let hasta = dateMonth.endOf('month').format('YYYYMMDD');
+  let desde = dateMonth.startOf('month').format('YYYYMMDD');
+
+  db.any(citiVentas, {fechaDesde:desde, fechaHasta:hasta })
+  .then(function (data) {
+    res.status(200)
+      .json({
+        status: 'success',
+        data: data,
+        message: 'Retrieved citi ventas data'
+      });
+  })
+  .catch(function (err) {
     return next(err);
   });
 });

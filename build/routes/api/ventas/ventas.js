@@ -12,6 +12,7 @@ var psp = (0, _dbHelper.sql)(__dirname, './presupuestos.sql');
 var docs = (0, _dbHelper.sql)(__dirname, './docsVtas.sql');
 var precios = (0, _dbHelper.sql)(__dirname, './lista-precios-stock.sql');
 var docsImp = (0, _dbHelper.sql)(__dirname, './docs-imp.sql');
+var citiVentas = (0, _dbHelper.sql)(__dirname, './citi-ventas.sql');
 
 router.get('/', function (req, res, next) {
   var today = moment();
@@ -101,6 +102,23 @@ router.get('/docs-imp', function (req, res, next) {
     });
   }).catch(function (err) {
     console.log('error en db', err);
+    return next(err);
+  });
+});
+
+router.get('/citi-ventas/:month', function (req, res, next) {
+
+  var dateMonth = moment(req.params.month);
+  var hasta = dateMonth.endOf('month').format('YYYYMMDD');
+  var desde = dateMonth.startOf('month').format('YYYYMMDD');
+
+  _db.db.any(citiVentas, { fechaDesde: desde, fechaHasta: hasta }).then(function (data) {
+    res.status(200).json({
+      status: 'success',
+      data: data,
+      message: 'Retrieved citi ventas data'
+    });
+  }).catch(function (err) {
     return next(err);
   });
 });
