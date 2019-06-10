@@ -12,8 +12,8 @@ log.txt
 .vscode/
 npm-debug.log*
 
-node_modules/
-build/
+node_modules/*
+build/*
 
 .gulp-cache
 .DS_Store
