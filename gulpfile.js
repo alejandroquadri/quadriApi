@@ -1,21 +1,14 @@
 var gulp = require('gulp');
-var print = require('gulp-print');
 var babel = require('gulp-babel');
 var nodemon = require('gulp-nodemon');
-// var notify = require('gulp-notify');
-// var livereload = require('gulp-livereload');
-var Cache = require('gulp-file-cache');
 
-var cache = new Cache();
-
-gulp.task('compile', () => {
-  var stream = gulp.src('./src/**/*.js') // your ES2015 code
-    .pipe(cache.filter()) // remember files
-    .pipe(print()) 
-    .pipe(babel({ presets: ['es2015'] })) // compile new ones
-    .pipe(cache.cache()) // cache them
-    .pipe(gulp.dest('./build')); // write them
-  return stream; // important for gulp-nodemon to wait for completion
+gulp.task('compile', () => { 
+  var stream = gulp.src('./src/**/*.js')    
+  .pipe(babel({       
+    "presets": ["env"]
+  }))  
+  .pipe(gulp.dest('./build'));
+  return stream;
 });
 
 gulp.task('sqlCopy', () => {
@@ -58,6 +51,6 @@ gulp.task('watch', gulp.series(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'c
   return stream;
 }));
 
-gulp.task('default', gulp.parallel(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy']));
+gulp.task('default', gulp.series(['compile', 'sqlCopy', 'jsonCopy', 'htmlCopy', 'cssCopy', 'imageCopy']));
 
 
