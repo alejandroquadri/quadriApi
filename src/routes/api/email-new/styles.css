@@ -1,8 +1,3 @@
-.prueba {
-  color:red;
-  margin-left:30px;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -22,7 +17,7 @@ body {
 }
 
 .header {
-  padding: 40px 30px 20px 30px;
+  padding: 40px 30px 0px 30px;
 }
 
 .col425 {
@@ -30,7 +25,10 @@ body {
 }
 
 .subhead {
-  font-size: 15px; color: #ffffff; font-family: sans-serif; letter-spacing: 10px;
+  font-size: 15px; 
+  color: #ffffff; 
+  font-family: sans-serif; 
+  letter-spacing: 10px;
 }
 
 .h1 {
@@ -42,6 +40,7 @@ body {
 .h1, .h2, .bodycopy {
   color: #153643; 
   font-family: sans-serif;
+  font-size: 13px;
 }
 
 .innerpadding {
@@ -52,16 +51,43 @@ body {
   border-bottom: 1px solid #f2eeed;
 }
 
+tr.headerTable td {
+  border-bottom: 1px solid #f2eeed;
+}
+
+.footerTable {
+  border-top: 1px solid #f2eeed;
+}
+
+table.pspTable td {
+  line-height: 2;
+}
+
 .h2 {
-  padding: 0 0 15px 0; 
-  font-size: 24px; 
-  line-height: 28px; 
-  font-weight: bold;
+  padding: 0 0 5px 0; 
+  font-size: 14px; 
+  line-height: 22px; 
 }
 
 .bodycopy {
-  font-size: 16px; 
+  /* font-size: 13px;  */
   line-height: 22px;
+}
+
+.obs {
+  padding-top: 30px;
+  white-space: pre-wrap; 
+}
+
+.pspTable {
+  font-family: sans-serif;
+  font-size: 12px; 
+  line-height: 22px;
+  padding: 20px 0 20px 0
+}
+
+.heading {
+  font-weight: bold;
 }
 
 .button {
@@ -94,11 +120,10 @@ img {
 
 .footercopy {
   font-family: sans-serif; 
-  font-size: 14px; 
-  color: #ffffff;
+  font-size: 12px; 
+  color: #969796;
 }
 
 .footercopy a {
-  color: #ffffff; 
   text-decoration: underline;
 }

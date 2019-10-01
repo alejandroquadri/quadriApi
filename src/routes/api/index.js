@@ -10,6 +10,7 @@ router.use('/np', require('./npPendientes/npPendientes'));
 router.use('/finanzas', require('./finanzas/finanzas'));
 router.use('/contabilidad', require('./contabilidad/contabilidad'));
 router.use('/email', require('./email/email-psp'));
+router.use('/email-new', require('./email-new/email-psp'));
 router.use('/query-quadri', require('./web/contact-quadri'));
 router.use('/query-queo', require('./web/contact-queo'));
 
