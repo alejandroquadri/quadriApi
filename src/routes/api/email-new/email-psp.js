@@ -18,31 +18,31 @@ const mailTransport = nodemailer.createTransport({
 
 router.post('/', function(req, res, next) {
 
-  const pspData = req.body;
-  let date = moment(pspData.date, "YYYY/MM/DD").format('DD/MM/YYYY');
+  const answer = req.body;
+  let date = moment(answer.date, "YYYY/MM/DD").format('DD/MM/YYYY');
 
   let iibb;
-  pspData.iibb === 0 ? iibb = '0' : iibb = decimal(Number(pspData.iibb), 0);
+  answer.iibb === 0 ? iibb = '0' : iibb = decimal(Number(answer.iibb), 0);
 
   let psp = {
-    to: pspData.to,
-    cc: pspData.cc,
-    number: pspData.number,
-    obs: pspData.obs,
-    razSoc: pspData.razSoc,
+    to: answer.to,
+    cc: answer.cc,
+    number: answer.number,
+    obs: answer.obs,
+    razSoc: answer.razSoc,
     date: date,
-    salesRep: pspData.salesRep,
-    total: decimal(Number(pspData.total), 0),
-    iva: decimal(Number(pspData.iva), 0),
+    salesRep: answer.salesRep,
+    total: decimal(Number(answer.total), 0),
+    iva: decimal(Number(answer.iva), 0),
     iibb: iibb,
-    final: decimal(Number(pspData.final), 0),
-    payment: pspData.payment,
+    final: decimal(Number(answer.final), 0),
+    payment: answer.payment,
   }
 
   let items = '';
 
-  for (let i=0; i < pspData.items.length; i ++) {
-    let item = htmlItem(pspData.items[i]);
+  for (let i=0; i < answer.items.length; i ++) {
+    let item = htmlItem(answer.items[i]);
     items += item;
   }
   psp['items'] = items;
@@ -60,10 +60,10 @@ router.post('/', function(req, res, next) {
     .then( processedSource => {
 
       const mailOptions = {
-        from: `"Quadri" <${pspData.currentEmail}>`,
-        sender: pspData.currentEmail,
-        replyTo: pspData.currentEmail,
-        cc: [pspData.currentEmail, psp.cc || ''],
+        from: `"Quadri" <${answer.currentEmail}>`,
+        sender: answer.currentEmail,
+        replyTo: answer.currentEmail,
+        cc: [answer.currentEmail, psp.cc || ''],
         to: psp.to,
         subject: `Quadri - Presupuesto ${psp.number}`,
         text: 'Version texto',
@@ -86,6 +86,37 @@ router.post('/', function(req, res, next) {
       });
     })
   });
+    
+});
+
+router.post('/answer', function(req, res, next) {
+
+  const answer = req.body;
+
+  const mailOptions = {
+    from: `"Quadri" <${answer.from}>`,
+    sender: answer.from,
+    replyTo: answer.from,
+    cc: [answer.from, ...answer.cc || ''],
+    to: answer.to,
+    subject: `Quadri - ${answer.interest || ''}`,
+    text: 'Version texto',
+    html: answer.text.replace(/\n/g, "<br>")
+  };
+
+  return mailTransport.sendMail(mailOptions)
+  .then(() => {
+    return res.status(200)
+    .send({
+      message: `Mail enviado`
+    });
+  })
+  .catch( reason => {
+    return res.status(400)
+    .send({
+      message: `Error, ${reason}`
+    });
+  })
     
 });
 
