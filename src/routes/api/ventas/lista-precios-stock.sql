@@ -12,6 +12,7 @@ SELECT  LPRECIO.CODIGO codigo,
         LPRECIO.INICIAL2_IMPORTE importe, 
         MONEDA.NOMBRE moneda, 
         UNIDADES.NOMBRE unidad,
+		    PROD.UNIDADESPORBULTO EQ,
         coalesce(
               (
                 SELECT sum(coalesce(inv.cantidad2_cantidad,0)) 
@@ -74,17 +75,16 @@ SELECT  LPRECIO.CODIGO codigo,
                   ),0) BloqueadoNL
 
 FROM   V_PRECIO LPRECIO  
-LEFT JOIN V_CODIGOALTERNATIVO ALIAS_1 ON LPRECIO.CODIGOALTERNATIVO_ID = ALIAS_1.ID   
 LEFT JOIN V_UNIDADFINANCIERA MONEDA ON LPRECIO.VALOR2_UNIDADVALORIZACION_ID = MONEDA.ID   
 LEFT JOIN V_UNIDADMEDIDA UNIDADES ON LPRECIO.DCANTIDAD2_UNIDADMEDIDA_ID = UNIDADES.ID  
 LEFT JOIN (
-            SELECT  id, segmento_id, codigo, rubro_id, activestatus
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus, UNIDADESPORBULTO
             FROM    producto
             UNION
-            SELECT  id, segmento_id, codigo, rubro_id, activestatus
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus, 1.0
             FROM    Servicio
             UNION
-            SELECT  id, segmento_id, codigo, rubro_id, activestatus
+            SELECT  id, segmento_id, codigo, rubro_id, activestatus, 1.0
             FROM    ConceptoContable
           ) PROD on LPRECIO.referencia_id = PROD.id
 LEFT JOIN RUBRO RUBROS ON PROD.rubro_id = RUBROS.id
