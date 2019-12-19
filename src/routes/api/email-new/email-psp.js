@@ -138,9 +138,11 @@ function decimal(value, fractionSize) {
 
 function htmlItem(item) {
 
+  if (!item.currency) item.currency = 'Pesos';
+
   return `
   <tr>
-    <td style="width: 220px;">
+    <td style="width: 200px;">
       ${item.description}
     </td>
     <td align="center">
@@ -151,6 +153,9 @@ function htmlItem(item) {
     </td>
     <td align="center">
       ${decimal(item.price, 1)}
+    </td>
+    <td align="center">
+      ${item.currency}
     </td>
     <td align="center">
       ${decimal(item.discount, 1) || 0} %

@@ -16,7 +16,10 @@
           <td>
               <![endif]-->
               <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-                
+
+                <tr>
+                  <td class="bodycopy obs">{{ obs }}</td>
+                </tr>
                 <!-- Fila con imagen, parrafo al lado y boton debajo -->
                 <tr>
                   <td class="header borderbottom">
@@ -70,6 +73,9 @@
                                       Precio
                                     </td>
                                     <td class="heading" align="center">
+                                      Moneda
+                                    </td>
+                                    <td class="heading" align="center">
                                       Dto
                                     </td>
                                     <td class="heading" align="center">
@@ -83,6 +89,8 @@
                                   {{{ items }}}
                                   <tr>
                                     <td class="footerTable">
+                                    </td>
+                                    <td align="center" class="footerTable">
                                     </td>
                                     <td align="center" class="footerTable">
                                     </td>
@@ -109,6 +117,8 @@
                                     </td>
                                     <td align="center">
                                     </td>
+                                    <td align="center">
+                                    </td>
                                     <td class="heading" align="center">IVA
                                     </td>
                                     <td align="center">
@@ -117,6 +127,8 @@
                                   </tr>
                                   <tr>
                                     <td>
+                                    </td>
+                                    <td align="center">
                                     </td>
                                     <td align="center">
                                     </td>
@@ -143,6 +155,8 @@
                                     </td>
                                     <td align="center">
                                     </td>
+                                    <td align="center">
+                                    </td>
                                     <td class="heading" align="center">Final
                                     </td>
                                     <td align="center">
@@ -157,9 +171,9 @@
                                 Forma de pago: {{ payment }}
                               </td>
                             </tr> -->
-                            <tr>
+                            <!-- <tr>
                               <td class="bodycopy obs">{{ obs }}</td>
-                            </tr>
+                            </tr> -->
                         </table>
                     </td>
                 </tr>
